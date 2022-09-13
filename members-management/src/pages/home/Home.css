@@ -1,0 +1,27 @@
+.homePage {
+    width: 100%;
+    padding: 2em 0;
+}
+.container {
+    max-width: 1200px;
+    padding: 0 15px;
+    display: block;
+    margin: auto;
+}
+.homePage .btnAddMember {
+    float: right;
+    margin-bottom: 30px;
+}
+.wrapperButton {
+    width: 100%;
+}
+.btnCenter {
+    display: block;
+    margin: auto;
+}
+.row {
+    float: right;
+}
+.elementNone {
+    display: none;
+}
