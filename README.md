@@ -1,2 +1,2 @@
-# reactjs-enrich-skills
-ReactJs course from FSoft
+# Reactjs enrich skills
+A ReactJs course from FSoft
