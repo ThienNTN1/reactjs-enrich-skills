@@ -1,86 +1,9 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { renameKeys } from "../../../utils/mapper";
-
-//register action
-export const registerUserAction = createAsyncThunk(
-  "user/regUser",
-  async (user, { rejectWithValue, getState, dispatch }) => {
-    const newKeys = {
-        email: 'email',
-        firstName: 'ten_tai_khoan',
-        lastName: 'ten_nhan_vien',
-        password: 'mat_khau',
-    };
-    const renamedUser = renameKeys(user, newKeys);
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    //http call
-    try {
-      const { data } = await axios.post(
-        // `${baseUrl}/api/users/register`,
-        "https://exam-dev-api.web5days.com:5001/api/user/regUser",
-        renamedUser,
-        config
-      );
-      return data;
-    } catch (error) {
-      if (!error.response) {
-        throw error;
-      }
-      return rejectWithValue(error?.response?.data);
-    }
-  }
-);
-
-//Login
-export const loginUserAction = createAsyncThunk(
-  "user/login",
-  async (userData, { rejectWithValue, getState, dispatch }) => {
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    try {
-      //make http call
-      const { data } = await axios.post(
-        // `${baseUrl}/api/users/login`,
-        "https://exam-dev-api.web5days.com:5001/api/user/login",
-        userData,
-        config
-      );
-      //save user into local storage
-      localStorage.setItem("userInfo", JSON.stringify(data));
-      return data;
-    } catch (error) {
-      if (!error?.response) {
-        throw error;
-      }
-      return rejectWithValue(error?.response?.data);
-    }
-  }
-);
-
-//Logout action
-export const logoutAction = createAsyncThunk(
-  "/user/logout",
-  async (payload, { rejectWithValue, getState, dispatch }) => {
-    try {
-      localStorage.removeItem("userInfo");
-    } catch (error) {
-      if (!error?.response) {
-        throw error;
-      }
-      return rejectWithValue(error?.response?.data);
-    }
-  }
-);
+import { createSlice } from "@reduxjs/toolkit";
+import {
+  registerUserAction,
+  loginUserAction,
+  logoutAction,
+} from "../../store/actions";
 
 //get user from local storage and place into store
 const userLoginFromStorage = localStorage.getItem("userInfo")
@@ -112,7 +35,7 @@ const usersSlices = createSlice({
       state.appErr = action?.payload?.message;
       state.serverErr = action?.payload?.error;
     });
-    
+
     //login
     builder.addCase(loginUserAction.pending, (state, action) => {
       state.loading = true;

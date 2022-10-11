@@ -1,42 +1,38 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { useDispatch } from "react-redux";
-
 import { Link } from "react-router-dom";
 import {
   MenuIcon,
   XIcon,
   BookOpenIcon,
-  LogoutIcon,
 } from "@heroicons/react/outline";
-import { PlusIcon } from "@heroicons/react/solid";
+import { PlusIcon, LogoutIcon } from "@heroicons/react/solid";
+import { useDispatch } from "react-redux";
 import { logoutAction } from "../../../redux/store/actions";
+
 
 const navigation = [
   { name: "Home", href: "/", current: true },
   { name: "Create", href: "/create-post", current: false },
   { name: "Posts", href: "/posts", current: false },
-  { name: "Authors", href: "/users", current: false },
-  { name: "Add Category", href: "/add-category", current: false },
-  { name: "Category List", href: "/category-list", current: false },
+  { name: "Profile", href: "/users", current: false },
 ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const AdminNavbar = ({ isLogin }) => {
-  //Navigation
+const PrivateNavbar = ({ isLogin }) => {
   const userNavigation = [
     { name: "Your Profile", href: `/profile/${isLogin?._id}` },
     { name: "Change your password", href: "/update-password" },
-    { name: "Settings", href: "/update-password" },
   ];
+
   //logout
   const dispatch = useDispatch();
   return (
-    <Disclosure as="nav" className="bg-green-800">
+    <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,12 +72,10 @@ const AdminNavbar = ({ isLogin }) => {
                 </div>
               </div>
               <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  {/* New post */}
+                <div className="flex-shrink-0 ">
                   <Link
                     to="/create-post"
-                    type="button"
-                    className="relative mr-4 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
+                    className="pr-3  relative inline-flex items-center mr-2 px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
                   >
                     <PlusIcon
                       className="-ml-1 mr-2 h-5 w-5"
@@ -89,7 +83,7 @@ const AdminNavbar = ({ isLogin }) => {
                     />
                     <span>New Post</span>
                   </Link>
-                  {/* Logout */}
+
                   <button
                     onClick={() => dispatch(logoutAction())}
                     type="button"
@@ -113,7 +107,7 @@ const AdminNavbar = ({ isLogin }) => {
                             <img
                               className="h-8 w-8 rounded-full"
                               src={isLogin?.profilePhoto}
-                              alt="Admin Profile"
+                              alt=""
                             />
                           </Menu.Button>
                         </div>
@@ -159,9 +153,9 @@ const AdminNavbar = ({ isLogin }) => {
           <Disclosure.Panel className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navigation.map(item => (
-                <Link
-                  to={`${item.href}`}
+                <a
                   key={item.name}
+                  href={item.href}
                   className={classNames(
                     item.current
                       ? "bg-gray-900 text-white"
@@ -171,18 +165,17 @@ const AdminNavbar = ({ isLogin }) => {
                   aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
-                </Link>
+                </a>
               ))}
             </div>
-            {/* Mobile  */}
+            {/* Mobile */}
             <div className="pt-4 pb-3 border-t border-gray-700">
               <div className="flex items-center px-5 sm:px-6">
                 <div className="flex-shrink-0">
-                  {/* Image */}
                   <img
                     className="h-10 w-10 rounded-full"
                     src={isLogin?.profilePhoto}
-                    alt={isLogin?.firstName}
+                    alt=""
                   />
                 </div>
                 <div className="ml-3">
@@ -213,4 +206,4 @@ const AdminNavbar = ({ isLogin }) => {
   );
 };
 
-export default AdminNavbar;
+export default PrivateNavbar;

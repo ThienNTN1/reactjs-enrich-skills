@@ -3,7 +3,8 @@ import { useFormik } from "formik";
 import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
-import { registerUserAction } from "../../../redux/slices/users/usersSlices";
+import { registerUserAction } from "../../../redux/store/actions";
+
 
 //Form schema
 const formSchema = Yup.object({
