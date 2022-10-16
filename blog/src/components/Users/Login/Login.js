@@ -4,7 +4,7 @@ import { Navigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import poster from "../../../img/poster.png";
-import { loginUserAction } from "../../../redux/store/actions";
+import { loginUserAction } from "../../../redux/slices/users/usersActions";
 
 //Form schema
 const formSchema = Yup.object({

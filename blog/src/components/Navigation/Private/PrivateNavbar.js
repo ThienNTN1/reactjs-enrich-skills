@@ -9,7 +9,7 @@ import {
 } from "@heroicons/react/outline";
 import { PlusIcon, LogoutIcon } from "@heroicons/react/solid";
 import { useDispatch } from "react-redux";
-import { logoutAction } from "../../../redux/store/actions";
+import { logoutAction } from "../../../redux/slices/users/usersActions";
 
 
 const navigation = [

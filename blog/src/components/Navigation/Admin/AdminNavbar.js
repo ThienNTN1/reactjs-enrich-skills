@@ -11,7 +11,7 @@ import {
   LogoutIcon,
 } from "@heroicons/react/outline";
 import { PlusIcon } from "@heroicons/react/solid";
-import { logoutAction } from "../../../redux/store/actions";
+import { logoutAction } from "../../../redux/slices/users/usersActions";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
@@ -112,7 +112,8 @@ const AdminNavbar = ({ isLogin }) => {
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                              src={isLogin?.profilePhoto}
+                              // src={isLogin?.profilePhoto}
+                              src="https://via.placeholder.com/150"
                               alt="Admin Profile"
                             />
                           </Menu.Button>

@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { renameKeys } from "../../utils/mapper";
+import baseUrl from "../../../utils/baseURL";
+import { renameKeys } from "../../../utils/mapper";
 
 //register action
 export const registerUserAction = createAsyncThunk(
@@ -22,8 +23,7 @@ export const registerUserAction = createAsyncThunk(
     //http call
     try {
       const { data } = await axios.post(
-        // `${baseUrl}/api/users/register`,
-        "https://exam-dev-api.web5days.com:5001/api/user/regUser",
+        `${baseUrl}/api/user/regUser`,
         renamedUser,
         config
       );
@@ -50,8 +50,7 @@ export const loginUserAction = createAsyncThunk(
     try {
       //make http call
       const { data } = await axios.post(
-        // `${baseUrl}/api/users/login`,
-        "https://exam-dev-api.web5days.com:5001/api/user/login",
+        `${baseUrl}/api/user/login`,
         userData,
         config
       );
