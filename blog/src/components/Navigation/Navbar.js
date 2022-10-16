@@ -10,7 +10,6 @@ const Navbar = () => {
   const { userAuth } = state;
   const {data: currentUser} = userAuth || {};
   const isAdmin = currentUser?.nhom_nhan_vien_id === '1';
-  console.log('userAuth', isAdmin );
 
   return (
     <>

@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import {
-  registerUserAction,
   loginUserAction,
   logoutAction,
-} from "../../store/actions";
+  registerUserAction,
+} from "./usersActions";
 
 //get user from local storage and place into store
 const userLoginFromStorage = localStorage.getItem("userInfo")
@@ -24,6 +25,7 @@ const usersSlices = createSlice({
       state.serverErr = undefined;
     });
     builder.addCase(registerUserAction.fulfilled, (state, action) => {
+      console.log('registerUserAction');
       state.loading = false;
       state.registered = action?.payload;
       state.appErr = undefined;
@@ -43,6 +45,7 @@ const usersSlices = createSlice({
       state.serverErr = undefined;
     });
     builder.addCase(loginUserAction.fulfilled, (state, action) => {
+      console.log('loginadasd');
       state.userAuth = action?.payload.data;
       state.loading = false;
       state.appErr = undefined;
