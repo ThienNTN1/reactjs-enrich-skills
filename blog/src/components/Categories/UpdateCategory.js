@@ -43,8 +43,6 @@ const UpdateCategory = () => {
     validationSchema: formSchema,
   });
 
-  console.log('isEdited', isEdited)
-
   //redirect
   if (isEdited || isDeleted) return <Navigate to="/category-list" />;
   return (

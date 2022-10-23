@@ -55,7 +55,6 @@ export const fetchCategoriesAction = createAsyncThunk(
     //http call
     try {
       const { data: {data} } = await axios.get(`${baseUrl}/api/post-categories`, config);
-      console.log('datatat', data)
       return data;
     } catch (error) {
       if (!error?.response) {
@@ -71,7 +70,6 @@ export const updateCategoriesAction = createAsyncThunk(
   "category/update",
   async (category, { rejectWithValue, getState, dispatch }) => {
     //get user token
-    console.log('category update', category);
     const user = getState()?.users;
     const { userAuth } = user;
     const config = {
@@ -143,7 +141,6 @@ export const fetchCategoryAction = createAsyncThunk(
     //http call
     try {
       const { data } = await axios.get(`${baseUrl}/api/post-category/${id}`, config);
-      console.log('fetchCategoryAction', data);
       return data;
     } catch (error) {
       if (!error?.response) {

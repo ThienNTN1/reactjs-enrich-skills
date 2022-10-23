@@ -42,7 +42,6 @@ const categorySlices = createSlice({
       state.loading = true;
     });
     builder.addCase(fetchCategoriesAction.fulfilled, (state, action) => {
-      console.log('fetchCategoriesAction', action);
       state.categoryList = action?.payload;
       state.loading = false;
       state.appErr = undefined;

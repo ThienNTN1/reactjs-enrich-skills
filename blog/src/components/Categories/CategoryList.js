@@ -15,8 +15,6 @@ const CategoryList = () => {
 
   const { categoryList, loading, appErr, serverErr } = category || {};
 
-  console.log("categoryList", categoryList);
-
   return (
     <>
       {loading ? (
