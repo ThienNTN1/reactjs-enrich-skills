@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Select from "react-select";
-import { fetchCategoriesAction } from "../../redux/slices/category/categorySlice";
+import { fetchCategoriesAction } from "../../redux/slices/category/categoryActions";
 
 const options = [
   { value: "chocolate", label: "Chocolate" },
@@ -21,8 +21,8 @@ const CategoryDropDown = props => {
 
   const allCategories = categoryList?.map(category => {
     return {
-      label: category?.title,
-      value: category?._id,
+      label: category?.ten_nhom,
+      value: category?.nhom_tin_tuc_id,
     };
   });
 
