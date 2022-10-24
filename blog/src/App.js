@@ -13,6 +13,7 @@ import PrivateProtectRoute from "./components/Navigation/ProtectedRoutes/Private
 import CreatePost from "./components/Posts/CreatePost";
 import UpdatePost from "./components/Posts/UpdatePost";
 import PostDetails from "./components/Posts/PostDetails";
+import Profile from "./components/Users/Profile/Profile";
 
 function App() {
   return (
@@ -35,6 +36,10 @@ function App() {
 
         {/* private route */}
         <Route
+          path="/profile/:id"
+          element={<PrivateProtectRoute component={Profile} />}
+        />
+        <Route
           path="/create-post"
           element={<PrivateProtectRoute component={CreatePost} />}
         />
@@ -42,7 +47,7 @@ function App() {
           path="/update-post/:id"
           element={<PrivateProtectRoute component={UpdatePost} />}
         />
-
+        
         {/* public route */}
         <Route path="posts" element={<PostsList />} />
         <Route path="/" element={<HomePage />} />

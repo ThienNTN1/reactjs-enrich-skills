@@ -13,6 +13,7 @@ const CategoryDropDown = props => {
   //dispatch action
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log('CategoryDropDown')
     dispatch(fetchCategoriesAction());
   }, [dispatch]);
   //select categories

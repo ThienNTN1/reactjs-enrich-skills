@@ -33,6 +33,8 @@ const AdminNavbar = ({ isLogin }) => {
     { name: "Change your password", href: "/update-password" },
     { name: "Settings", href: "/update-password" },
   ];
+  console.log('admin navbar', isLogin);
+
   //logout
   const dispatch = useDispatch();
   return (

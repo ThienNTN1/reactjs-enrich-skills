@@ -23,11 +23,12 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const PrivateNavbar = ({ isLogin }) => {
+const PrivateNavbar = ({ user }) => {
   const userNavigation = [
-    { name: "Your Profile", href: `/profile/${isLogin?._id}` },
+    { name: "Your Profile", href: `/profile/${user?.nhan_vien_id}` },
     { name: "Change your password", href: "/update-password" },
   ];
+  console.log('private navbar', user);
 
   //logout
   const dispatch = useDispatch();
@@ -106,7 +107,7 @@ const PrivateNavbar = ({ isLogin }) => {
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                              src={isLogin?.profilePhoto}
+                              src={user?.anh_dai_dien || "https://exam-admin.web5days.com/static/media/defaultUser.4aa827c3440249505e81.jpg"}
                               alt=""
                             />
                           </Menu.Button>
@@ -174,16 +175,16 @@ const PrivateNavbar = ({ isLogin }) => {
                 <div className="flex-shrink-0">
                   <img
                     className="h-10 w-10 rounded-full"
-                    src={isLogin?.profilePhoto}
+                    src={user?.profilePhoto}
                     alt=""
                   />
                 </div>
                 <div className="ml-3">
                   <div className="text-base font-medium text-white">
-                    {isLogin?.firstName} {isLogin?.lastName}
+                    {user?.firstName} {user?.lastName}
                   </div>
                   <div className="text-sm font-medium text-gray-400">
-                    {isLogin?.email}
+                    {user?.email}
                   </div>
                 </div>
               </div>

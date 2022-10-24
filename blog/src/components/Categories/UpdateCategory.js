@@ -20,6 +20,7 @@ const UpdateCategory = () => {
   const dispatch = useDispatch();
   //fetch single category
   useEffect(() => {
+    console.log('UpdateCategory')
     dispatch(fetchCategoryAction(id));
   }, []);
 
