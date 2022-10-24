@@ -21,6 +21,8 @@ function classNames(...classes) {
 }
 
 const PublicNavbar = () => {
+  console.log('public navbar');
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (

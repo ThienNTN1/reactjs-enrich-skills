@@ -23,6 +23,7 @@ export default function UpdatePost(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log('UpdatePost')
     dispatch(fetchPostDetailsAction(id));
   }, [id, dispatch]);
   //selet post

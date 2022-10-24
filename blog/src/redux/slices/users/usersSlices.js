@@ -4,6 +4,7 @@ import {
   loginUserAction,
   logoutAction,
   registerUserAction,
+  userProfileAction,
 } from "./usersActions";
 
 //get user from local storage and place into store
@@ -43,7 +44,6 @@ const usersSlices = createSlice({
       state.serverErr = undefined;
     });
     builder.addCase(loginUserAction.fulfilled, (state, action) => {
-      console.log('loginadasd');
       state.userAuth = action?.payload.data;
       state.loading = false;
       state.appErr = undefined;
@@ -67,8 +67,27 @@ const usersSlices = createSlice({
     });
     builder.addCase(logoutAction.rejected, (state, action) => {
       state.loading = false;
-      state.appErr = action?.payload?.message;
+      state.appErr = action?.payload?.error;
       state.serverErr = action?.error?.message;
+    });
+
+    // Profile
+    builder.addCase(userProfileAction.pending, (state, action) => {
+      state.profileLoading = true;
+      state.profileAppErr = undefined;
+      state.profileServerErr = undefined;
+    });
+    builder.addCase(userProfileAction.fulfilled, (state, action) => {
+      state.profile = action?.payload;
+      state.profileLoading = false;
+      state.profileAppErr = undefined;
+      state.profileServerErr = undefined;
+    });
+    builder.addCase(userProfileAction.rejected, (state, action) => {
+      console.log('action', action)
+      state.profileAppErr = action?.payload?.error;
+      state.profileServerErr = action?.error?.message;
+      state.profileLoading = false;
     });
   },
 });
