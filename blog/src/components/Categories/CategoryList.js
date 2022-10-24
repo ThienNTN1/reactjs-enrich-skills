@@ -9,7 +9,6 @@ import moment from "moment";
 const CategoryList = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log('CategoryList')
     dispatch(fetchCategoriesAction());
   }, [dispatch]);
   const category = useSelector((state) => state?.category);

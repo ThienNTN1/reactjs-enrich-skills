@@ -26,12 +26,10 @@ export default function PostsList() {
   const dispatch = useDispatch();
   //fetch post
   useEffect(() => {
-    console.log('PostsList1')
     dispatch(fetchPostsAction(""));
   }, [dispatch]);
   //fetch categories
   useEffect(() => {
-    console.log('PostsList2')
     dispatch(fetchCategoriesAction());
   }, [dispatch]);
 

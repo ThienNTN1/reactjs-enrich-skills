@@ -83,7 +83,6 @@ const postSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(fetchPostsAction.fulfilled, (state, action) => {
-      console.log('action?.payload', action?.payload)
       state.postLists = action?.payload?.data;
       state.loading = false;
       state.appErr = undefined;

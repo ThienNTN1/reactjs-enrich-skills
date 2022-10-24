@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import {
+  fetchUsersAction,
   loginUserAction,
   logoutAction,
   registerUserAction,
@@ -44,7 +45,7 @@ const usersSlices = createSlice({
       state.serverErr = undefined;
     });
     builder.addCase(loginUserAction.fulfilled, (state, action) => {
-      state.userAuth = action?.payload.data;
+      state.userAuth = action?.payload;
       state.loading = false;
       state.appErr = undefined;
       state.serverErr = undefined;
@@ -84,10 +85,27 @@ const usersSlices = createSlice({
       state.profileServerErr = undefined;
     });
     builder.addCase(userProfileAction.rejected, (state, action) => {
-      console.log('action', action)
       state.profileAppErr = action?.payload?.error;
       state.profileServerErr = action?.error?.message;
       state.profileLoading = false;
+    });
+
+    //All Users
+    builder.addCase(fetchUsersAction.pending, (state, action) => {
+      state.loading = true;
+      state.appErr = undefined;
+      state.serverErr = undefined;
+    });
+    builder.addCase(fetchUsersAction.fulfilled, (state, action) => {
+      state.loading = false;
+      state.usersList = action?.payload;
+      state.appErr = undefined;
+      state.serverErr = undefined;
+    });
+    builder.addCase(fetchUsersAction.rejected, (state, action) => {
+      state.loading = false;
+      state.appErr = action?.payload?.error;
+      state.serverErr = action?.error?.message;
     });
   },
 });

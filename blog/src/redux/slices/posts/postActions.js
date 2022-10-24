@@ -20,7 +20,6 @@ export const createpostAction = createAsyncThunk(
       },
     };
 
-    console.log('post', post);
     try {
       const postDetails = {
         tieu_de: post?.title,
@@ -34,7 +33,6 @@ export const createpostAction = createAsyncThunk(
         postDetails,
         config
       );
-      console.log('data', data);
 
       //dispatch action
       dispatch(resetPost());

@@ -24,11 +24,11 @@ function classNames(...classes) {
 }
 
 const PrivateNavbar = ({ user }) => {
+  console.log('user from private navbar', user)
   const userNavigation = [
     { name: "Your Profile", href: `/profile/${user?.nhan_vien_id}` },
     { name: "Change your password", href: "/update-password" },
   ];
-  console.log('private navbar', user);
 
   //logout
   const dispatch = useDispatch();

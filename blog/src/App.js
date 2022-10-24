@@ -14,6 +14,7 @@ import CreatePost from "./components/Posts/CreatePost";
 import UpdatePost from "./components/Posts/UpdatePost";
 import PostDetails from "./components/Posts/PostDetails";
 import Profile from "./components/Users/Profile/Profile";
+import UsersList from "./components/Users/UsersList/UsersList";
 
 function App() {
   return (
@@ -21,6 +22,10 @@ function App() {
       <Navbar />
       <Routes>
         {/* admin route */}
+        <Route
+          path="/users"
+          element={<AdminRoute component={UsersList} />}
+        />
         <Route
           path="/add-category"
           element={<AdminRoute component={AddNewCategory} />}
