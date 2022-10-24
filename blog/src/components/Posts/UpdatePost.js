@@ -23,7 +23,6 @@ export default function UpdatePost(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('UpdatePost')
     dispatch(fetchPostDetailsAction(id));
   }, [id, dispatch]);
   //selet post
@@ -32,7 +31,6 @@ export default function UpdatePost(props) {
 
   //select updated post from store;
   const postUpdate = useSelector((state) => state.post);
-  console.log('postUpdate', postUpdate);
   const { loading, appErr, serverErr, isUpdated } = postUpdate;
   //formik
   const formik = useFormik({

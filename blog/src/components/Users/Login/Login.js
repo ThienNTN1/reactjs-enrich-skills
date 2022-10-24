@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import poster from "../../../img/poster.png";
 import { loginUserAction } from "../../../redux/slices/users/usersActions";
+import _ from "lodash";
 
 //Form schema
 const formSchema = Yup.object({
@@ -28,9 +29,11 @@ const Login = () => {
   });
 
   //redirect
-  const store = useSelector(state => state?.users);
-  const { userAuth, loading, serverErr, appErr } = store;
-  if (userAuth) return <Navigate to={`/profile/${userAuth?.nhan_vien_id}`} />;
+  const user = useSelector(state => state?.users);
+  const { loading, serverErr, appErr } = user;
+  const userAuth = _.get(user, 'userAuth.data', undefined);
+  if (userAuth) return <Navigate to={`/profile/${userAuth.nhan_vien_id}`} />;
+  
   return (
     <>
       <section className="min-h-screen relative py-20 2xl:py-40 bg-gray-900 overflow-hidden">

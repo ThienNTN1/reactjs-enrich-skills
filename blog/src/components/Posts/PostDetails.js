@@ -23,7 +23,6 @@ const PostDetails = () => {
   const postImage = postDetails?.anh_dai_dien;
 
   useEffect(() => {
-    console.log('PostDetails')
     dispatch(fetchPostDetailsAction(id));
   }, [id, dispatch]);
 

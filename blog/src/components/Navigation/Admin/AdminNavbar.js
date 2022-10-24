@@ -26,14 +26,13 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const AdminNavbar = ({ isLogin }) => {
+const AdminNavbar = ({ user }) => {
   //Navigation
   const userNavigation = [
-    { name: "Your Profile", href: `/profile/${isLogin?._id}` },
+    { name: "Your Profile", href: `/profile/${user?.nhan_vien_id}` },
     { name: "Change your password", href: "/update-password" },
     { name: "Settings", href: "/update-password" },
   ];
-  console.log('admin navbar', isLogin);
 
   //logout
   const dispatch = useDispatch();
@@ -184,16 +183,16 @@ const AdminNavbar = ({ isLogin }) => {
                   {/* Image */}
                   <img
                     className="h-10 w-10 rounded-full"
-                    src={isLogin?.profilePhoto}
-                    alt={isLogin?.firstName}
+                    src={user?.profilePhoto}
+                    alt={user?.firstName}
                   />
                 </div>
                 <div className="ml-3">
                   <div className="text-base font-medium text-white">
-                    {isLogin?.firstName} {isLogin?.lastName}
+                    {user?.firstName} {user?.lastName}
                   </div>
                   <div className="text-sm font-medium text-gray-400">
-                    {isLogin?.email}
+                    {user?.email}
                   </div>
                 </div>
               </div>

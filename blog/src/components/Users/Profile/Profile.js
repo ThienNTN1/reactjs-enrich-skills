@@ -19,7 +19,6 @@ export default function Profile(props) {
 
   //fetch user profile
   useEffect(() => {
-    console.log('Profile')
     dispatch(userProfileAction(id));
   }, [id, dispatch]);
 

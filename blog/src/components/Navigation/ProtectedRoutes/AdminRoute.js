@@ -7,6 +7,8 @@ const AdminRoute = ({ component: Component, ...rest }) => {
   // Check if user is loggin
   const user = useSelector((state) => state.users);
   const userAuth = _.get(user, 'userAuth.data', {})
+
+  console.log('admin root user', user);
   const isAdmin = userAuth?.nhom_nhan_vien_id === "1";
 
   return isAdmin ? <Component {...rest} /> : <Navigate to="/login" />;
