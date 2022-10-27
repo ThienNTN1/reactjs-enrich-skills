@@ -34,7 +34,7 @@ const usersSlices = createSlice({
     });
     builder.addCase(registerUserAction.rejected, (state, action) => {
       state.loading = false;
-      state.appErr = action?.payload?.message;
+      state.appErr = action?.payload?.error;
       state.serverErr = action?.payload?.error;
     });
 
@@ -125,7 +125,7 @@ const usersSlices = createSlice({
     // });
     // builder.addCase(createCategoryAction.rejected, (state, action) => {
     //   state.loading = false;
-    //   state.appErr = action?.payload?.message;
+    //   state.appErr = action?.payload?.error;
     //   state.serverErr = action?.error?.message;
     // });
   },

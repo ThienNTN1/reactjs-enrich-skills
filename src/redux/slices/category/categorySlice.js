@@ -34,7 +34,7 @@ const categorySlices = createSlice({
     });
     builder.addCase(createCategoryAction.rejected, (state, action) => {
       state.loading = false;
-      state.appErr = action?.payload?.message;
+      state.appErr = action?.payload?.error;
       state.serverErr = action?.error?.message;
     });
     //fetch all
@@ -49,7 +49,7 @@ const categorySlices = createSlice({
     });
     builder.addCase(fetchCategoriesAction.rejected, (state, action) => {
       state.loading = false;
-      state.appErr = action?.payload?.message;
+      state.appErr = action?.payload?.error;
       state.serverErr = action?.error?.message;
     });
     //update
@@ -69,7 +69,7 @@ const categorySlices = createSlice({
     });
     builder.addCase(updateCategoriesAction.rejected, (state, action) => {
       state.loading = false;
-      state.appErr = action?.payload?.message;
+      state.appErr = action?.payload?.error;
       state.serverErr = action?.error?.message;
     });
 
@@ -90,7 +90,7 @@ const categorySlices = createSlice({
     });
     builder.addCase(deleteCategoriesAction.rejected, (state, action) => {
       state.loading = false;
-      state.appErr = action?.payload?.message;
+      state.appErr = action?.payload?.error;
       state.serverErr = action?.error?.message;
     });
 
@@ -106,7 +106,7 @@ const categorySlices = createSlice({
     });
     builder.addCase(fetchCategoryAction.rejected, (state, action) => {
       state.loading = false;
-      state.appErr = action?.payload?.message;
+      state.appErr = action?.payload?.error;
       state.serverErr = action?.error?.message;
     });
   },

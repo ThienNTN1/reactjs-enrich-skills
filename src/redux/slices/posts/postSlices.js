@@ -74,7 +74,7 @@ const postSlice = createSlice({
     });
     builder.addCase(deletePostAction.rejected, (state, action) => {
       state.loading = false;
-      state.appErr = action?.payload?.message;
+      state.appErr = action?.payload?.error;
       state.serverErr = action?.error?.message;
     });
 
@@ -90,7 +90,7 @@ const postSlice = createSlice({
     });
     builder.addCase(fetchPostsAction.rejected, (state, action) => {
       state.loading = false;
-      state.appErr = action?.payload?.message;
+      state.appErr = action?.payload?.error;
       state.serverErr = action?.error?.message;
     });
 
@@ -121,7 +121,7 @@ const postSlice = createSlice({
     });
     builder.addCase(toggleAddLikesToPost.rejected, (state, action) => {
       state.loading = false;
-      state.appErr = action?.payload?.message;
+      state.appErr = action?.payload?.error;
       state.serverErr = action?.error?.message;
     });
     //DisLikes
@@ -136,7 +136,7 @@ const postSlice = createSlice({
     });
     builder.addCase(toggleAddDisLikesToPost.rejected, (state, action) => {
       state.loading = false;
-      state.appErr = action?.payload?.message;
+      state.appErr = action?.payload?.error;
       state.serverErr = action?.error?.message;
     });
   },
