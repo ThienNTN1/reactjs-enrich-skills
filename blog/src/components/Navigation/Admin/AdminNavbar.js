@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { useDispatch } from "react-redux";
 
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import {
   MenuIcon,
   XIcon,
@@ -14,11 +14,11 @@ import { PlusIcon } from "@heroicons/react/solid";
 import { logoutAction } from "../../../redux/slices/users/usersActions";
 
 const navigation = [
-  { name: "Home", href: "/", current: true },
+  { name: "Home", href: "/", current: false },
   { name: "Create", href: "/create-post", current: false },
   { name: "Posts", href: "/posts", current: false },
   { name: "Authors", href: "/users", current: false },
-  { name: "Add Category", href: "/add-category", current: false },
+  { name: "Add Category", href: "/add-category", current: true },
   { name: "Category List", href: "/category-list", current: false },
 ];
 
@@ -37,7 +37,7 @@ const AdminNavbar = ({ user }) => {
   //logout
   const dispatch = useDispatch();
   return (
-    <Disclosure as="nav" className="bg-green-800">
+    <Disclosure as="nav" className="bg-green-800 sticky w-full top-0">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -56,23 +56,28 @@ const AdminNavbar = ({ user }) => {
                 </div>
                 <div className="flex-shrink-0 flex items-center">
                   {/* Logo */}
-                  <BookOpenIcon className="h-10 w-10 text-yellow-200" />
+                  <Link to="/">
+                    <BookOpenIcon className="h-10 w-10 text-yellow-200" />
+                  </Link>
                 </div>
-                <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
-                  {navigation.map(item => (
-                    <Link
+                <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4 sticky">
+                  {navigation.map((item) => (
+                    <NavLink
                       key={item.name}
                       to={item.href}
-                      className={classNames(
-                        item.current
-                          ? "bg-gray-900 text-white"
-                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        "px-3 py-2 rounded-md text-sm font-medium"
-                      )}
+                      className={({ isActive }) =>
+                        classNames(
+                          isActive
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          "px-3 py-2 rounded-md text-sm font-medium"
+                        )
+                      }
                       aria-current={item.current ? "page" : undefined}
+                      end
                     >
                       {item.name}
-                    </Link>
+                    </NavLink>
                   ))}
                 </div>
               </div>
@@ -133,7 +138,7 @@ const AdminNavbar = ({ user }) => {
                             static
                             className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                           >
-                            {userNavigation.map(item => (
+                            {userNavigation.map((item) => (
                               <Menu.Item key={item.name}>
                                 {({ active }) => (
                                   <a
@@ -160,7 +165,7 @@ const AdminNavbar = ({ user }) => {
 
           <Disclosure.Panel className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              {navigation.map(item => (
+              {navigation.map((item) => (
                 <Link
                   to={`${item.href}`}
                   key={item.name}
@@ -197,7 +202,7 @@ const AdminNavbar = ({ user }) => {
                 </div>
               </div>
               <div className="mt-3 px-2 space-y-1 sm:px-3">
-                {userNavigation.map(item => (
+                {userNavigation.map((item) => (
                   <a
                     key={item.name}
                     href={item.href}

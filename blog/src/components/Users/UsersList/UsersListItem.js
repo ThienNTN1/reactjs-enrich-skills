@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { MailIcon } from "@heroicons/react/solid";
 import { useDispatch, useSelector } from "react-redux";
 import baseUrl from "../../../utils/baseURL";
+import moment from "moment";
 
-const UsersListItem = user => {
+const UsersListItem = (user) => {
   //dispatch
   const dispatch = useDispatch();
-
+  console.log("userdasda", user);
   return (
     <>
       <div className="p-8 mb-4 bg-white shadow rounded">
@@ -24,53 +25,47 @@ const UsersListItem = user => {
               alt="profile "
             />
             <div>
-              <p className="text-sm font-medium">
-                {user?.user?.ten_nhan_vien}
-              </p>
+              <p className="text-sm font-medium">{user?.user?.ten_nhan_vien}</p>
               <p className="text-xs text-gray-500">{user?.user?.email}</p>
             </div>
           </div>
           <div className="w-1/2 lg:w-2/12 px-4 mb-6 lg:mb-0">
-            <p className="py-1 px-2 text-xs text-purple-500 bg-purple-50 rounded-full">
-              {user?.user?.nhom?.ten_nhom}
+            <span className="inline-flex items-center px-3 py-0.5 rounded-lg text-sm font-medium text-gray-50 bg-purple-300">
+              {user?.user?.nhom_nhan_vien?.ten_nhom}
+            </span>
+          </div>
+          <div className="w-1/2 lg:w-2/12 px-4 mb-6 lg:mb-0">
+            <p className="text-sm font-medium">
+              Username:{" "}
+              <span className="text-base mr-2  text-bold text-yellow-500">
+                {user.user?.ten_tai_khoan}
+              </span>
+            </p>
+          </div>
+          <div className="w-full flex lg:w-4/12 px-4  mb-6 lg:mb-0">
+            <p className="inline-block py-1 px-2 mr-2 mb-1 lg:mb-0 text-xs">
+              Name:{" "}
+              <span className="text-base mr-2 text-bold text-yellow-500">
+                {user.user?.ten_nhan_vien}
+              </span>
             </p>
           </div>
           <div className="w-1/2 lg:w-2/12 px-4 mb-6 lg:mb-0">
             <p className="text-sm font-medium">
+              Status:{" "}
               <span className="text-base mr-2  text-bold text-yellow-500">
-                {user.user?.followers?.length}
-              </span>
-              followers
-            </p>
-          </div>
-          <div className="w-full flex lg:w-4/12 px-4  mb-6 lg:mb-0">
-            <p className="inline-block py-1 px-2 mr-2 mb-1 lg:mb-0 text-xs border-2 rounded">
-              <span className="text-base mr-2  boder-2 text-bold text-yellow-500">
-                {user.user?.posts?.length} - Posts
+                {user.user?.trang_thai}
               </span>
             </p>
-            <Link
-              to={`/profile/${user?.user?._id}`}
-              className=" text-gray-600 inline-block py-1 px-2 text-center mr-2 mb-1 lg:mb-0 text-xs border-2 border-yellow-500 rounded hover:bg-green-600 hover:text-white"
-            >
-              Profile
-            </Link>
-            <button
-              className="inline-flex  justify-center bg-green-700 px-2   border border-yellow-700 shadow-sm text-sm font-medium rounded-md text-gray-700  hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
-            >
-              <MailIcon
-                className="-ml-1 mr-2 h-5 w-5 text-gray-200"
-                aria-hidden="true"
-              />
-              <span className="text-base mr-2  text-bold text-yellow-500">
-                Message
-              </span>
-            </button>
           </div>
           <div className="w-full lg:w-1/12 px-4">
             <div className="flex items-center">
-              {/* Send Mail */}
-              <div></div>
+            <p className="text-sm font-medium">
+              Created Date:{" "}
+              <span className="text-base mr-2  text-bold text-yellow-500">
+                {moment(user.user?.ngay_tao).format("DD MMM YYYY")}
+              </span>
+            </p>
             </div>
           </div>
         </div>

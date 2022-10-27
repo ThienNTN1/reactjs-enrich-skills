@@ -93,7 +93,7 @@ export default function Profile(props) {
                             </div>
                           </div>
                         </div>
-                        <div className="hidden sm:block 2xl:hidden mt-6 min-w-0 flex-1">
+                        <div className="hidden sm:block mt-6 min-w-0 flex-1">
                           <p class="leading-normal text-size-sm">
                             {profile?.gioi_thieu ||
                               `Hi, I'm Alec Thompson, Decisions: If you can't

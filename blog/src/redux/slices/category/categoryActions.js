@@ -7,11 +7,12 @@ export const resetEditAction = createAction("category/reset");
 export const resetDeleteAction = createAction("category/delete-reset");
 export const resetCategoryAction = createAction("category/created-reset");
 
-//action
+// Action
+// Create
 export const createCategoryAction = createAsyncThunk(
   "category/create",
   async (category, { rejectWithValue, getState, dispatch }) => {
-    //get user token
+    // Get user token
     const user = getState()?.users;
     const { userAuth } = user;
     const config = {
@@ -19,7 +20,7 @@ export const createCategoryAction = createAsyncThunk(
         Authorization: `Bearer ${userAuth?.token}`,
       },
     };
-    //http call
+    // http call
     try {
       const { data } = await axios.post(
         `${baseUrl}/api/post-category`,
@@ -28,7 +29,7 @@ export const createCategoryAction = createAsyncThunk(
         },
         config
       );
-      //dispatch action
+      // Dispatch action
       dispatch(resetCategoryAction());
       return data;
     } catch (error) {

@@ -107,6 +107,27 @@ const usersSlices = createSlice({
       state.appErr = action?.payload?.error;
       state.serverErr = action?.error?.message;
     });
+
+    // // Create
+    // builder.addCase(createCategoryAction.pending, (state, action) => {
+    //   state.loading = true;
+    // });
+    // //dispatch action to redirect
+    // builder.addCase(resetCategoryAction, (state, action) => {
+    //   state.isCreated = true;
+    // });
+    // builder.addCase(createCategoryAction.fulfilled, (state, action) => {
+    //   state.category = action?.payload;
+    //   state.isCreated = false;
+    //   state.loading = false;
+    //   state.appErr = undefined;
+    //   state.serverErr = undefined;
+    // });
+    // builder.addCase(createCategoryAction.rejected, (state, action) => {
+    //   state.loading = false;
+    //   state.appErr = action?.payload?.message;
+    //   state.serverErr = action?.error?.message;
+    // });
   },
 });
 
