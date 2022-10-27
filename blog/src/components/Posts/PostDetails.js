@@ -30,7 +30,8 @@ const PostDetails = () => {
   const user = useSelector((state) => state.users);
   const currentUser = _.get(user, "userAuth.data", {});
 
-  const isCreatedBy = postDetails?.nguoi_tao === currentUser?.nhan_vien_id;
+  const isCreatedBy = [currentUser?.nguoi_tao, currentUser?.nhan_vien_id].includes(postDetails?.nguoi_tao);
+
   if (isDeleted) return <Navigate to="/posts" />;
   return (
     <>

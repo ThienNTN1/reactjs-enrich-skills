@@ -1,5 +1,5 @@
 import { Disclosure } from "@headlessui/react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import {
   MenuIcon,
   XIcon,
@@ -9,7 +9,7 @@ import {
 import { PlusIcon } from "@heroicons/react/solid";
 
 const navigation = [
-  { name: "Home", href: "/", current: true },
+  { name: "Home", href: "/", current: false },
   { name: "Create", href: "/create-post", current: false },
   { name: "Posts", href: "/posts", current: false },
   { name: "Register", href: "/register", current: false },
@@ -21,9 +21,8 @@ function classNames(...classes) {
 }
 
 const PublicNavbar = () => {
-
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-gray-800 sticky w-full top-0 z-50">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -42,23 +41,28 @@ const PublicNavbar = () => {
                 </div>
                 <div className="flex-shrink-0 flex items-center">
                   {/* Logo */}
-                  <BookOpenIcon className="h-10 w-10 text-yellow-200" />
+                  <Link to="/">
+                    <BookOpenIcon className="h-10 w-10 text-yellow-200" />
+                  </Link>
                 </div>
                 <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
-                  {navigation.map(item => (
-                    <Link
+                  {navigation.map((item) => (
+                    <NavLink
                       key={item.name}
                       to={item.href}
-                      className={classNames(
-                        item.current
-                          ? "bg-gray-900 text-white"
-                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        "px-3 py-2 rounded-md text-sm font-medium"
-                      )}
+                      className={({ isActive }) =>
+                        classNames(
+                          isActive
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          "px-3 py-2 rounded-md text-sm font-medium"
+                        )
+                      }
                       aria-current={item.current ? "page" : undefined}
+                      end
                     >
                       {item.name}
-                    </Link>
+                    </NavLink>
                   ))}
                 </div>
               </div>
@@ -94,7 +98,7 @@ const PublicNavbar = () => {
 
           <Disclosure.Panel className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              {navigation.map(item => (
+              {navigation.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
