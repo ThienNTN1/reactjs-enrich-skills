@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/reactjs-enrich-skills/static/css/main.87ee8edb.css",
-    "main.js": "/reactjs-enrich-skills/static/js/main.a2653d25.js",
+    "main.js": "/reactjs-enrich-skills/static/js/main.fe23433b.js",
     "static/media/poster.png": "/reactjs-enrich-skills/static/media/poster.1052f6e9dfd49f1d3e54.png",
     "index.html": "/reactjs-enrich-skills/index.html",
     "main.87ee8edb.css.map": "/reactjs-enrich-skills/static/css/main.87ee8edb.css.map",
-    "main.a2653d25.js.map": "/reactjs-enrich-skills/static/js/main.a2653d25.js.map"
+    "main.fe23433b.js.map": "/reactjs-enrich-skills/static/js/main.fe23433b.js.map"
   },
   "entrypoints": [
     "static/css/main.87ee8edb.css",
-    "static/js/main.a2653d25.js"
+    "static/js/main.fe23433b.js"
   ]
 }
