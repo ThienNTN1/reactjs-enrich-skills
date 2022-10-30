@@ -5,6 +5,8 @@ import {
   loginUserAction,
   logoutAction,
   registerUserAction,
+  resetPasswordAction,
+  updatePasswordAction,
   userProfileAction,
 } from "./usersActions";
 
@@ -103,6 +105,29 @@ const usersSlices = createSlice({
       state.serverErr = undefined;
     });
     builder.addCase(fetchUsersAction.rejected, (state, action) => {
+      state.loading = false;
+      state.appErr = action?.payload?.error;
+      state.serverErr = action?.error?.message;
+    });
+
+    //update password
+    builder.addCase(resetPasswordAction, (state, action) => {
+      state.isPasswordUpdated = true;
+    });
+    builder.addCase(updatePasswordAction.pending, (state, action) => {
+      state.loading = true;
+      state.appErr = undefined;
+      state.serverErr = undefined;
+    });
+    builder.addCase(updatePasswordAction.fulfilled, (state, action) => {
+      state.loading = false;
+      state.passwordUpdated = action?.payload;
+      state.isPasswordUpdated = false;
+      state.appErr = undefined;
+      state.serverErr = undefined;
+    });
+    builder.addCase(updatePasswordAction.rejected, (state, action) => {
+      console.log(action.payload);
       state.loading = false;
       state.appErr = action?.payload?.error;
       state.serverErr = action?.error?.message;
