@@ -8,7 +8,6 @@ import moment from "moment";
 const UsersListItem = (user) => {
   //dispatch
   const dispatch = useDispatch();
-  console.log("userdasda", user);
   return (
     <>
       <div className="p-8 mb-4 bg-white shadow rounded">

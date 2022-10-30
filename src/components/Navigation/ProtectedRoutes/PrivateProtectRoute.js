@@ -7,7 +7,6 @@ const PrivateProtectRoute = ({ component: Component, ...rest }) => {
   // Check if user is loggin
   const user = useSelector((state) => state?.users);
   const { userAuth } = user;
-  console.log('private route user', user);
 
   return userAuth ? <Component {...rest} /> : <Navigate to="/login" />;
 };

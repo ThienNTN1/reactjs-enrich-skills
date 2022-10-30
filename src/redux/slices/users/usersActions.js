@@ -6,6 +6,7 @@ import _ from "lodash";
 
 // Reset actions
 export const resetPasswordAction = createAction("password/reset");
+export const resetUserAction = createAction("user/profile/reset");
 
 //register action
 export const registerUserAction = createAsyncThunk(
@@ -131,7 +132,7 @@ export const fetchUsersAction = createAsyncThunk(
   }
 );
 
-//Update Password
+// Update Password
 export const updatePasswordAction = createAsyncThunk(
   "password/update",
   async (password, { rejectWithValue, getState, dispatch }) => {
@@ -167,71 +168,55 @@ export const updatePasswordAction = createAsyncThunk(
   }
 );
 
-// //action to redirect
-// export const resetEditAction = createAction("category/reset");
-// export const resetDeleteAction = createAction("category/delete-reset");
-// export const resetUserAction = createAction("user/created-reset");
+// Update user action
+export const updateUserAction = createAsyncThunk(
+  "users/update",
+  async (userData, { rejectWithValue, getState, dispatch }) => {
+    //get user token
+    const user = getState()?.users;
+    const { userAuth } = user;
+    const userId = _.get(userAuth, "data.nhan_vien_id", undefined);
 
-// // Create
-// export const createUserAction = createAsyncThunk(
-//   "user/create",
-//   async (user, { rejectWithValue, getState, dispatch }) => {
-//     // Get user token
-//     const state = getState()?.users;
-//     const { userAuth } = state;
-//     const config = {
-//       headers: {
-//         Authorization: `Bearer ${userAuth?.token}`,
-//       },
-//     };
-//     // http call
-//     try {
-//       const { data } = await axios.post(
-//         `${baseUrl}/api/user`,
-//         {
-//           ...user,
-//         },
-//         config
-//       );
-//       // Dispatch action
-//       dispatch(resetUserAction());
-//       return data;
-//     } catch (error) {
-//       if (!error?.response) {
-//         throw error;
-//       }
-//       return rejectWithValue(error?.response?.data);
-//     }
-//   }
-// );
+    console.log('user data', userData);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userAuth?.token}`,
+      },
+    };
+    //http call
+    try {
+      const { data } = await axios.put(
+        `${baseUrl}/api/user/${userId}`,
+        {
+          ten_nhan_vien: userData?.name,
+          so_dien_thoai: userData?.mobile,
+          gioi_thieu: userData?.bio,
+          email: userData?.email,
+        },
+        config
+      );
+      //dispatch
+      dispatch(resetUserAction());
+      return data;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
 
-// //Update
-// export const updateUserAction = createAsyncThunk(
-//   "user/update",
-//   async (user, { rejectWithValue, getState, dispatch }) => {
-//     //get user token
-//     const state = getState()?.users;
-//     const { userAuth } = state;
-//     const config = {
-//       headers: {
-//         Authorization: `Bearer ${userAuth?.token}`,
-//       },
-//     };
-//     //http call
-//     try {
-//       const { data } = await axios.put(
-//         `${baseUrl}/api/user/${user?.id}`,
-//         { ten_nhom: category?.title },
-//         config
-//       );
-//       //dispatch ation to reset the updated data
-//       dispatch(resetEditAction());
-//       return data;
-//     } catch (error) {
-//       if (!error?.response) {
-//         throw error;
-//       }
-//       return rejectWithValue(error?.response?.data);
-//     }
-//   }
-// );
+//fetch User details
+export const fetchUserDetailsAction = createAsyncThunk(
+  "user/detail",
+  async (id, { rejectWithValue, getState, dispatch }) => {
+    try {
+      const { data } = await axios.get(`${baseUrl}/api/user/${id}`);
+      return data;
+    } catch (error) {
+      if (!error?.response) throw error;
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
