@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import {
+  fetchUserDetailsAction,
   fetchUsersAction,
   loginUserAction,
   logoutAction,
   registerUserAction,
   resetPasswordAction,
+  resetUserAction,
   updatePasswordAction,
+  updateUserAction,
   userProfileAction,
 } from "./usersActions";
 
@@ -127,32 +130,50 @@ const usersSlices = createSlice({
       state.serverErr = undefined;
     });
     builder.addCase(updatePasswordAction.rejected, (state, action) => {
-      console.log(action.payload);
       state.loading = false;
       state.appErr = action?.payload?.error;
       state.serverErr = action?.error?.message;
     });
 
-    // // Create
-    // builder.addCase(createCategoryAction.pending, (state, action) => {
-    //   state.loading = true;
-    // });
-    // //dispatch action to redirect
-    // builder.addCase(resetCategoryAction, (state, action) => {
-    //   state.isCreated = true;
-    // });
-    // builder.addCase(createCategoryAction.fulfilled, (state, action) => {
-    //   state.category = action?.payload;
-    //   state.isCreated = false;
-    //   state.loading = false;
-    //   state.appErr = undefined;
-    //   state.serverErr = undefined;
-    // });
-    // builder.addCase(createCategoryAction.rejected, (state, action) => {
-    //   state.loading = false;
-    //   state.appErr = action?.payload?.error;
-    //   state.serverErr = action?.error?.message;
-    // });
+    //update
+    builder.addCase(resetUserAction, (state, action) => {
+      state.isUpdated = true;
+    });
+    builder.addCase(updateUserAction.pending, (state, action) => {
+      state.loading = true;
+      state.appErr = undefined;
+      state.serverErr = undefined;
+    });
+    builder.addCase(updateUserAction.fulfilled, (state, action) => {
+      state.loading = false;
+      state.userUpdated = action?.payload;
+      state.isUpdated = false;
+      state.appErr = undefined;
+      state.serverErr = undefined;
+    });
+    builder.addCase(updateUserAction.rejected, (state, action) => {
+      state.loading = false;
+      state.appErr = action?.payload?.error;
+      state.serverErr = action?.error?.message;
+    });
+
+    //user details
+    builder.addCase(fetchUserDetailsAction.pending, (state, action) => {
+      state.loading = true;
+      state.appErr = undefined;
+      state.serverErr = undefined;
+    });
+    builder.addCase(fetchUserDetailsAction.fulfilled, (state, action) => {
+      state.loading = false;
+      state.userDetails = action?.payload;
+      state.appErr = undefined;
+      state.serverErr = undefined;
+    });
+    builder.addCase(fetchUserDetailsAction.rejected, (state, action) => {
+      state.loading = false;
+      state.appErr = action?.payload?.error;
+      state.serverErr = action?.error?.message;
+    });
   },
 });
 

@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { UserIcon } from "@heroicons/react/outline";
 import _ from "lodash";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +18,7 @@ export default function Profile(props) {
   const { profileLoading, profileAppErr, profileServerErr } = users;
   const userAuth = _.get(users, "userAuth.data", {});
   const profile = _.get(users, "profile.data", {});
+  const isLoginUser = userAuth?.nhan_vien_id === profile?.nhan_vien_id;
 
   //fetch user profile
   useEffect(() => {
@@ -88,10 +91,23 @@ export default function Profile(props) {
                                   "DD MMM YYYY"
                                 )}
                               </p>
-
-                              {/* is login user */}
                             </div>
                           </div>
+                          {/* Update Profile */}
+                          <>
+                                {isLoginUser && (
+                                  <Link
+                                    to={`/update-profile/${profile?.nhan_vien_id}`}
+                                    className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                                  >
+                                    <UserIcon
+                                      className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                                      aria-hidden="true"
+                                    />
+                                    <span>Update Profile</span>
+                                  </Link>
+                                )}
+                              </>
                         </div>
                         <div className="hidden sm:block mt-6 min-w-0 flex-1">
                           <p class="leading-normal text-size-sm">
