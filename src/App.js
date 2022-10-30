@@ -15,6 +15,7 @@ import UpdatePost from "./components/Posts/UpdatePost";
 import PostDetails from "./components/Posts/PostDetails";
 import Profile from "./components/Users/Profile/Profile";
 import UsersList from "./components/Users/UsersList/UsersList";
+import UpdatePassword from "./components/Users/PasswordManagement/UpdatePassword";
 
 function App() {
   return (
@@ -43,6 +44,10 @@ function App() {
         <Route
           path="/profile/:id"
           element={<PrivateProtectRoute component={Profile} />}
+        />
+        <Route
+          path="/update-password"
+          element={<PrivateProtectRoute component={UpdatePassword} />}
         />
         <Route
           path="/create-post"

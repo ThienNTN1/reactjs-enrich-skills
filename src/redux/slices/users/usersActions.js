@@ -2,6 +2,10 @@ import { createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import baseUrl from "../../../utils/baseURL";
 import { renameKeys } from "../../../utils/mapper";
+import _ from "lodash";
+
+// Reset actions
+export const resetPasswordAction = createAction("password/reset");
 
 //register action
 export const registerUserAction = createAsyncThunk(
@@ -122,6 +126,42 @@ export const fetchUsersAction = createAsyncThunk(
       return data;
     } catch (error) {
       if (!error?.response) throw error;
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+//Update Password
+export const updatePasswordAction = createAsyncThunk(
+  "password/update",
+  async (password, { rejectWithValue, getState, dispatch }) => {
+    //get user token
+    const user = getState()?.users;
+    const { userAuth } = user;
+    const userId = _.get(userAuth, "data.nhan_vien_id", undefined);
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userAuth?.token}`,
+      },
+    };
+    //http call
+    try {
+      const { data } = await axios.put(
+        `${baseUrl}/api/user/${userId}`,
+        {
+          mat_khau_moi: password,
+          isChanged: true,
+        },
+        config
+      );
+      //dispatch
+      dispatch(resetPasswordAction());
+      return data;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
       return rejectWithValue(error?.response?.data);
     }
   }
