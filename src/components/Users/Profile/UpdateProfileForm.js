@@ -18,6 +18,7 @@ const formSchema = Yup.object({
 
 const UpdateProfileForm = () => {
   const { id } = useParams();
+  console.log('id', id)
   const dispatch = useDispatch();
   //fetch user details
   useEffect(() => {
@@ -26,7 +27,6 @@ const UpdateProfileForm = () => {
 
   //get user from store
   const users = useSelector((state) => state.users);
-  console.log('user from update proifile', users)
   const { isUpdated, loading, appErr, serverErr } = users;
   const userDetails = _.get(users, 'userDetails.data', {})
 
