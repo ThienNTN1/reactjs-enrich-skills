@@ -1,21 +1,22 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchUsersAction } from "../../../redux/slices/users/usersActions";
+import { deleteUserAction, fetchUsersAction } from "../../../redux/slices/users/usersActions";
 import LoadingComponent from "../../../utils/LoadingComponent";
-import { PencilAltIcon } from "@heroicons/react/outline";
 import _ from "lodash";
-
-import UsersListItem from "./UsersListItem";
 import moment from "moment";
 
 const UsersList = () => {
-  //dispatch
+  //dispatch 
   const dispatch = useDispatch();
   //data from store
   const users = useSelector((state) => state?.users);
-  const { appErr, serverErr, loading } = users;
+  const { appErr, serverErr, loading, isDeleted } = users;
   const usersList = _.get(users, "usersList.data", []);
+
+  if (isDeleted) {
+    dispatch(fetchUsersAction());
+  }
 
   //fetch all users
   useEffect(() => {
@@ -90,7 +91,7 @@ const UsersList = () => {
                         <tr className="bg-gray-50">
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             <img
-                              className="h-10 w-10 rounded-full"
+                            className="h-10 w-10 rounded-full"
                               src="https://via.placeholder.com/150"
                               alt="category profile"
                             />
@@ -99,14 +100,14 @@ const UsersList = () => {
                             {user.email}
                             <div class="flex flex-row">
                               <Link
-                                to={`/update-category/${user?.nhom_tin_tuc_id}`}
+                                to={`/update-profile/${user?.nhan_vien_id}`}
                               >
                                 <div class="text-violet-600">Edit</div>
                               </Link>
                               <Link
-                                to={`/update-category/${user?.nhom_tin_tuc_id}`}
+                                onClick={() => dispatch(deleteUserAction(user?.nhan_vien_id))}
                               >
-                                <div class="ml-2 text-red-600">Delete</div>
+                                <div class="ml-2 text-red-600">{user?.trang_thai === 'active' ? 'Lock' : 'Delete'}</div>
                               </Link>
                               <Link
                                 to={`/profile/${user?.nhan_vien_id}`}

@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import {
+  deleteUserAction,
   fetchUserDetailsAction,
   fetchUsersAction,
   loginUserAction,
   logoutAction,
   registerUserAction,
+  resetDeleteUserAction,
   resetPasswordAction,
   resetUserAction,
   updatePasswordAction,
@@ -170,6 +172,27 @@ const usersSlices = createSlice({
       state.serverErr = undefined;
     });
     builder.addCase(fetchUserDetailsAction.rejected, (state, action) => {
+      state.loading = false;
+      state.appErr = action?.payload?.error;
+      state.serverErr = action?.error?.message;
+    });
+
+    // Delete user
+    builder.addCase(deleteUserAction.pending, (state, action) => {
+      state.loading = true;
+    });
+    // Dispatch for redirect
+    builder.addCase(resetDeleteUserAction, (state, action) => {
+      state.isDeleted = true;
+    });
+    builder.addCase(deleteUserAction.fulfilled, (state, action) => {
+      state.deletedUser = action?.payload;
+      state.isDeleted = false;
+      state.loading = false;
+      state.appErr = undefined;
+      state.serverErr = undefined;
+    });
+    builder.addCase(deleteUserAction.rejected, (state, action) => {
       state.loading = false;
       state.appErr = action?.payload?.error;
       state.serverErr = action?.error?.message;

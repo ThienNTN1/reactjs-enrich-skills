@@ -220,3 +220,35 @@ export const fetchUserDetailsAction = createAsyncThunk(
     }
   }
 );
+
+export const resetDeleteUserAction = createAction("user/delete-reset");
+
+// Delete
+export const deleteUserAction = createAsyncThunk(
+  "user/delete",
+  async (id, { rejectWithValue, getState, dispatch }) => {
+    //get user token
+    const user = getState()?.users;
+    const { userAuth } = user;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userAuth?.token}`,
+      },
+    };
+    //http call
+    try {
+      const { data } = await axios.delete(
+        `${baseUrl}/api/user/${id}`,
+        config
+      );
+      //dispatch action
+      dispatch(resetDeleteUserAction());
+      return data;
+    } catch (error) {
+      if (!error?.response) {
+        throw error;
+      }
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
