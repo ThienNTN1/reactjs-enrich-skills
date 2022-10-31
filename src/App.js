@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 import AddNewCategory from "./components/Categories/AddNewCategory";
 import AdminRoute from "./components/Navigation/ProtectedRoutes/AdminRoute";
@@ -20,7 +20,7 @@ import UpdateProfileForm from "./components/Users/Profile/UpdateProfileForm";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Navbar />
       <Routes>
         {/* admin route */}
@@ -70,7 +70,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/posts/:id" element={<PostDetails />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
